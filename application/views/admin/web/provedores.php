@@ -14,6 +14,7 @@
                     <?php 
                         
                     if(isset($output)){
+                        
                         echo $output; 
                     }else{
                         echo "<h3>Este cuadro no tiene opciones que puedan ser modificadas</h3><br>";
