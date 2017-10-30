@@ -1,14 +1,14 @@
 
-<div id="page-wrapper">
+<div class="row"  id="page-wrapper">
             <div class="row">
-                <div class="col-lg-12">
+                <div >
                     <h1 class="page-header"><?php echo "Panel Administrativo"; ?></h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             
             
-                  <div class="col-lg-12">
+                  <div >
             
                 
                     <?php 

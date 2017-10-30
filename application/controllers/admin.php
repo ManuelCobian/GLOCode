@@ -120,6 +120,9 @@ class Admin extends CI_Controller
 						
 						
 						$crud->unset_bootstrap();
+						
+						$crud->unset_delete();
+						$crud->unset_edit();
 						//$crud->unset_jquery();
 						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
 						
@@ -140,74 +143,69 @@ class Admin extends CI_Controller
 		}
 
 
-
-			function Usuarios()
+		function Usuarios()
 					
                     {
-							 
-							 $this->load->library('session');
-
-
-
-							 $email=$this->session->userdata('email');
+						 $this->load->library('session');
+						 	 $email=$this->session->userdata('email');
 
 							$provedor=$this->provedores->get_user_id($email);
 
+				 	try{
+						
+						$this->db = $this->load->database("default", TRUE);
+						
+						$crud = new grocery_CRUD();
+						
+						$crud->set_theme('bootstrap');
+						$crud->set_table('users');
+						$crud->set_primary_key('id'); // Indicar el campo Llave
+						$crud->where('users_id',$provedor['id']);
+						$crud->set_subject('Provedores del Sistema');
+						//$crud->required_fields('Provedores del Sistema');
+						
+						
+						$crud->columns('Nombre','Apellidos','Correo','Telefono','Direccion','nivel_id','users_id'); 
+						$crud->display_as('Nombre','Nombre del Usuario');
+						$crud->display_as('Apellidos','Apellidos del Usuario');
+						$crud->display_as('Direccion','Direccion del Usuario');
+						$crud->display_as('Correo','Correo del Usuario');
+						$crud->display_as('Telefono','Telefono del Usuario');
+						
+						$crud->display_as('Direccion','Direccion del Usuario');
+						
+						$crud->display_as('nivel_id','Tipo Usuario');
+						
+						$crud->display_as('users_id','Provedor');
 							
-							 	try{
-									
-									$this->db = $this->load->database("default", TRUE);
-									
-									$crud = new grocery_CRUD();
-									
-									$crud->set_theme('bootstrap');
-									$crud->set_table('clientes');
+							
+						
+						
+						$crud->fields('Nombre','Apellidos','Correo','nivel_id','users_id');
 
-									$crud->set_primary_key('id'); // Indicar el campo Llave
-									$crud->set_subject('Usuarios del Sistema');
-									//$crud->required_fields('Provedores del Sistema');
-									
-									
-									$crud->columns('Nombre','Apellidos','Direccion','Correo','users_id'); 
-
-
-									
-									$crud->display_as('Nombre','Nombre del provedor');
-									$crud->display_as('Apellidos','Apellidos del provedor');
-									$crud->display_as('Direccion','Direccion del provedor');
-									$crud->display_as('Correo','Correo del provedor');
-									$crud->display_as('users_id','Correo del provedor');
-
-
-
-									
-									
-									
-									$crud->fields('Nombre','Apellidos','Correo','users_id');
-
-									$crud->set_primary_key('id','provedores');
+						$crud->set_primary_key('id','provedores');
 									$crud->set_relation('users_id','provedores','Correo');
+						
+						
+						$crud->unset_bootstrap();
+						
+						$crud->unset_delete();
+						$crud->unset_edit();
+						//$crud->unset_jquery();
+						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
+						
+						$output = $crud->render();
 
-									$crud->where('users_id',$provedor['id']);
-
-									$crud->where('nivel_id','user');
-
-									$crud->unset_bootstrap();
-									//$crud->unset_jquery();
-									$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_user'));
-									
-									$output = $crud->render();
-
-									$this->_example_output($output,null);
-									
-									
+						$this->_example_output($output,null);
+						
+						
 
 
 
-								}
-								catch(Exception $e){
-									show_error($e->getMessage().' --- '.$e->getTraceAsString());
-								}	
+					}
+					catch(Exception $e){
+						show_error($e->getMessage().' --- '.$e->getTraceAsString());
+					}
 					
 					}
 
@@ -216,6 +214,77 @@ class Admin extends CI_Controller
 		function Clientes()
 					
                     {
+							$this->load->library('session');
+						 	 $email=$this->session->userdata('email');
+
+							$provedor=$this->provedores->get_user_id($email);
+
+				 	try{
+						
+						$this->db = $this->load->database("default", TRUE);
+						
+						$crud = new grocery_CRUD();
+						
+						$crud->set_theme('bootstrap');
+						$crud->set_table('client');
+						$crud->set_primary_key('id'); // Indicar el campo Llave
+						$crud->where('users_id',$provedor['id']);
+						$crud->set_subject('Provedores del Sistema');
+						//$crud->required_fields('Provedores del Sistema');
+						
+						
+						$crud->columns('Nombre','Apellidos','Correo','Telefono','Empresa','RFC','Direccion','nivel_id','users_id'); 
+						$crud->display_as('Nombre','Nombre del Usuario');
+						$crud->display_as('Apellidos','Apellidos del Usuario');
+						$crud->display_as('Direccion','Direccion del Usuario');
+						$crud->display_as('Correo','Correo del Usuario');
+						$crud->display_as('Telefono','Telefono del Usuario');
+						$crud->display_as('Empresa','Empresa del Usuario');
+						$crud->display_as('Direccion','Direccion del Usuario');
+						$crud->display_as('RFC','RFC del Usuario');
+						$crud->display_as('nivel_id','Tipo Usuario');
+						
+						$crud->display_as('users_id','Provedor');
+							
+							
+						
+						
+						$crud->fields('Nombre','Apellidos','Correo','nivel_id','users_id');
+
+						$crud->set_primary_key('id','provedores');
+									$crud->set_relation('users_id','provedores','Correo');
+						
+						
+						$crud->unset_bootstrap();
+						
+						$crud->unset_delete();
+						$crud->unset_edit();
+						//$crud->unset_jquery();
+						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
+						
+						$output = $crud->render();
+
+						$this->_example_output($output,null);
+						
+						
+
+
+
+					}
+					catch(Exception $e){
+						show_error($e->getMessage().' --- '.$e->getTraceAsString());
+					}
+					
+					
+			}
+
+
+
+
+
+		function Movimientos()
+					
+                    {
 							 
 							 $this->load->library('session');
 
@@ -225,6 +294,22 @@ class Admin extends CI_Controller
 
 							$provedor=$this->provedores->get_user_id($email);
 
+							$clientes=$this->provedores->get_client_id($provedor['id']);
+
+							$id_clientes;
+
+							foreach ($clientes as $key ) {
+								
+
+								$id_clientes=$key['id'];
+							}
+
+
+
+
+						
+
+
 							
 							 	try{
 									
@@ -233,40 +318,45 @@ class Admin extends CI_Controller
 									$crud = new grocery_CRUD();
 									
 									$crud->set_theme('bootstrap');
-									$crud->set_table('clientes');
-
+									$crud->set_table('movimientos');
+									$crud->where('id_clients',$id_clientesgit );
 									$crud->set_primary_key('id'); // Indicar el campo Llave
 									$crud->set_subject('Clientes del Sistema');
 									//$crud->required_fields('Provedores del Sistema');
 									
 									
-									$crud->columns('Nombre','Apellidos','Direccion','Correo','users_id'); 
+									$crud->columns('Movimiento','Confirmacion','Origen','Destino','id_status','id_clients','ruta','Comentarios'); 
 
 
 									
-									$crud->display_as('Nombre','Nombre del provedor');
-									$crud->display_as('Apellidos','Apellidos del provedor');
-									$crud->display_as('Direccion','Direccion del provedor');
-									$crud->display_as('Correo','Correo del provedor');
-									$crud->display_as('users_id','Correo del provedor');
+									$crud->display_as('Movimiento','Movimiento');
+									$crud->display_as('Confirmacion','Confirmacion');
+									$crud->display_as('Origen','Origen');
+									$crud->display_as('id_status','Estado del Movimiento');
+									$crud->display_as('ruta','Documento del Movimiento');
+									$crud->display_as('Comentarios','Comentarios del Movimiento');
+									$crud->display_as('id_clients','Cliente');
 
 
 
 									
 									
 									
-									$crud->fields('Nombre','Apellidos','Correo','users_id');
+									$crud->fields('Movimiento','Confirmacion','Origen','Destino','id_status','id_clients','ruta','Comentarios');
 
-									$crud->set_primary_key('id','provedores');
-									$crud->set_relation('users_id','provedores','Correo');
 
-									$crud->where('users_id',$provedor['id']);
+										$crud->set_field_upload('ruta', RUTA_DOCUMENTOS);
 
-									$crud->where('nivel_id','client');
+									$crud->set_primary_key('id','client');
+									$crud->set_relation('id_clients','client','Nombre');
+
+								
+
+									//$crud->where('nivel_id','client');
 
 									$crud->unset_bootstrap();
 									//$crud->unset_jquery();
-									$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_cliente'));
+									$crud->add_action('Hacer Confirmacion', '', '','fa fa-envelope-o"');
 									
 									$output = $crud->render();
 

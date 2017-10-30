@@ -121,7 +121,7 @@ foreach($css_files as $file): ?>
 
                    
                         <li>
-                            <a href="index.html"><i class="fa fa-car fa-fw"></i>Movimientos en Procesos</a>
+                            <a href="<?php echo base_url('master/Movimientos') ?>"><i class="fa fa-car fa-fw"></i>Movimientos en Procesos</a>
                         
                         </li>
 
