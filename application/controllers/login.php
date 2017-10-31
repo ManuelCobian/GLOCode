@@ -16,7 +16,7 @@ class Login extends CI_Controller
 				
 				if (!isset($fila)) {
 					# code...
-					$this->login_client($email,$password);
+					$this->login_user($email,$password);
 					
 				}
 				else{
@@ -59,9 +59,13 @@ class Login extends CI_Controller
 				$contra=md5($password);
 				
 				$fila =$this->auth->getuser($email);
+
+				;
 				
 				if (!isset($fila)){
 					$this->login_client($email,$password);
+
+
 				}
 
 				
@@ -72,7 +76,7 @@ class Login extends CI_Controller
 							'email' =>$email , 
 							'id'  => $fila->id,
 							'login'=>true,
-							'nivel'=>$fila['Tipo_usuario']
+							'nivel'=>$fila['nivel_id']
 							);
 							$this->session->set_userdata($data);
 							redirect(base_url('users'));
@@ -108,7 +112,7 @@ class Login extends CI_Controller
 							'email' =>$email , 
 							'id'  => $fila->id,
 							'login'=>true,
-							'nivel'=>$fila['Tipo_usuario']
+							'nivel'=>$fila['nivel_id']
 							);
 							$this->session->set_userdata($data);
 							redirect(base_url('clients'));
