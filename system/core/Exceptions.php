@@ -182,7 +182,7 @@ class CI_Exceptions {
 		include(APPPATH.'errors/error_php.php');
 		$buffer = ob_get_contents();
 		ob_end_clean();
-		echo $buffer;
+		//echo $buffer;
 	}
 
 

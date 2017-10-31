@@ -27,7 +27,7 @@
  * @version    	1.5.6
  * @link		http://www.grocerycrud.com/documentation
  */
-class Grocery_crud_model  extends CI_Model  {
+class grocery_CRUD_Model  extends CI_Model  {
 
 	protected $primary_key = null;
 	protected $table_name = null;

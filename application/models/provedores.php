@@ -28,11 +28,20 @@ class provedores extends CI_Model
 
 	}
 
+
+	
+
+
+
 	function get_client_id($id){
-		
-		$this->db->select('id');
+
+		$this->db->select('*');
 		$this->db->from('client');
-		$this->db->where('users_id',$id);
+		$this->db->join('provedores', 'provedores.id = client.users_id');
+
+		$this->db->where('client.users_id',$id);
+		
+		
 
 
 

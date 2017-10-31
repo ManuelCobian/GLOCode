@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
-<html lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+<html lang="es">
+<head><meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	
 <!-- Inserted by miarroba -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -113,7 +114,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 												<span class="input-group-addon">
 													<i class="glyphicon glyphicon-lock"></i>
 												</span>
-									<input class="form-control" placeholder="Contraseña" name="password_txt" type="password" id="pw" required>
+									<input class="form-control" placeholder="password" name="password_txt" type="password" id="pw" required>
 									
 											</div>
 										</div>

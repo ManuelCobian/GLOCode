@@ -282,7 +282,7 @@ class Admin extends CI_Controller
 
 
 
-		function Movimientos()
+			function Movimientos()
 					
                     {
 							 
@@ -298,10 +298,12 @@ class Admin extends CI_Controller
 
 							$id_clientes;
 
+
 							foreach ($clientes as $key ) {
 								
 
 								$id_clientes=$key['id'];
+
 							}
 
 
@@ -319,7 +321,7 @@ class Admin extends CI_Controller
 									
 									$crud->set_theme('bootstrap');
 									$crud->set_table('movimientos');
-									$crud->where('id_clients',$id_clientesgit );
+									$crud->where('id_clients',$id_clientes);
 									$crud->set_primary_key('id'); // Indicar el campo Llave
 									$crud->set_subject('Clientes del Sistema');
 									//$crud->required_fields('Provedores del Sistema');

@@ -18,7 +18,7 @@ class Master extends CI_Controller
 			$this->load->helper('url');
 
 			$this->load->library('grocery_CRUD');
-			
+			$this->load->model('grocery_crud_model');
 			$this->load->library('email');
 			$this->load->library('upload');
 			$this->load->library('form_validation');
@@ -66,7 +66,7 @@ class Master extends CI_Controller
 				
 					else{
 		        	$this->session->sess_destroy();//para destruir sesion
-					redirect(base_url('/'));
+					redirect("http://glologistics.com.mx/login.html");
         		 }
 
 

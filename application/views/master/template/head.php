@@ -87,12 +87,7 @@ foreach($css_files as $file): ?>
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                             <center> <a href="<?php echo base_url('master') ?>"><?php echo $this->session->userdata('email'); ?></a></center>  
                             </div>
                             <!-- /input-group -->
                         </li>
@@ -131,7 +126,7 @@ foreach($css_files as $file): ?>
                         
                         </li>
 
-
+                
                         
                       
                           
@@ -145,6 +140,7 @@ foreach($css_files as $file): ?>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
+            
         </nav>
 
 
