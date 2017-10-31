@@ -112,7 +112,7 @@ class Login extends CI_Controller
 							'email' =>$email , 
 							'id'  => $fila->id,
 							'login'=>true,
-							'nivel'=>$fila['nivel_id']
+							'nivel'=>$fila['Tipo_usuario']
 							);
 							$this->session->set_userdata($data);
 							redirect(base_url('clients'));
