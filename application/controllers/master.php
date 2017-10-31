@@ -140,7 +140,7 @@ class Master extends CI_Controller
 		}
 
 
-function Usuarios()
+          function Usuarios()
 					
                     {
 						 $this->load->library('session');
@@ -346,6 +346,87 @@ function Usuarios()
 
 									$crud->set_primary_key('id','client');
 									$crud->set_relation('id_clients','client','Nombre');
+
+								
+
+									//$crud->where('nivel_id','client');
+
+									$crud->unset_bootstrap();
+									//$crud->unset_jquery();
+									$crud->add_action('Hacer Confirmacion', '', '','fa fa-list fa-fw""');
+									
+									$output = $crud->render();
+
+									$this->_example_output($output,null);
+									
+									
+
+
+
+								}
+								catch(Exception $e){
+									show_error($e->getMessage().' --- '.$e->getTraceAsString());
+								}	
+					
+					}
+
+
+
+		function Movimientos_Facturas()
+					
+                    {
+							 
+							 $this->load->library('session');
+
+
+
+							 $email=$this->session->userdata('email');
+
+							$provedor=$this->provedores->get_user_id($email);
+
+							$clientes=$this->provedores->get_client_id($provedor['id']);
+
+							
+							 	try{
+									
+									$this->db = $this->load->database("default", TRUE);
+									
+									$crud = new grocery_CRUD();
+									
+									$crud->set_theme('bootstrap');
+									$crud->set_table('movimientos_facturas');
+									//$crud->where('id_clients',$id_clientes );
+									$crud->set_primary_key('id'); // Indicar el campo Llave
+									$crud->set_subject('Clientes del Sistema');
+									//$crud->required_fields('Provedores del Sistema');
+									
+									
+									$crud->columns('id_movimiento','id_client','pdf','status_factura'); 
+
+
+									
+									$crud->display_as('id_movimiento','Movimiento');
+									$crud->display_as('id_client','Cliente');
+									$crud->display_as('pdf','Factura');
+
+									$crud->display_as('status_factura','Estado de la Factura');
+									
+
+									
+									
+									
+									$crud->fields('id_movimiento','id_client','pdf','status_factura');
+
+
+										$crud->set_field_upload('pdf', RUTA_DOCUMENTOS);
+										$crud->set_field_upload('xml', RUTA_DOCUMENTOS);
+
+									$crud->set_primary_key('id','client');
+									$crud->set_relation('id_client','client','Nombre');
+
+
+									$crud->set_primary_key('id','movimientos');
+									$crud->set_relation('id_movimiento','movimientos','movimiento');
 
 								
 

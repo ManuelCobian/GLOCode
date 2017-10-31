@@ -13,7 +13,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                  <h2>Mexico</h2> 
+                                  <h3>Mexico</h3> 
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><h3><?php date_default_timezone_set('America/Mexico_City');
@@ -46,7 +46,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                  <h2>California</h2> 
+                                  <h3>California</h3> 
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><h3><?php date_default_timezone_set('America/New_York');
@@ -79,7 +79,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                  <h2>Shanghai</h2> 
+                                  <h3>Shanghai</h3> 
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><h3><?php date_default_timezone_set('Asia/Shanghai');
@@ -114,7 +114,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                  <h2>Chile</h2> 
+                                  <h3>Chile</h3> 
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><h3><?php date_default_timezone_set('America/Santiago');
@@ -147,7 +147,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                  <h2>España</h2> 
+                                  <h3>España</h3> 
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><h3><?php date_default_timezone_set('Europe/Madrid');
@@ -180,7 +180,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                  <h2>Australia</h2> 
+                                  <h3>Australia</h3> 
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><h3><?php date_default_timezone_set('Australia/Sydney');
