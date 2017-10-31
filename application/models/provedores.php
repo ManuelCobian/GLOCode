@@ -56,5 +56,37 @@ class provedores extends CI_Model
             return false;
 		}
 	}
+
+
+
+
+	function get_movimientos_id($id){
+
+		$this->db->select('*');
+		$this->db->from('movimientos');
+		$this->db->join('client', 'client.id =movimientos.id_clients');
+
+		$this->db->where('movimientos.id_clients',$id);
+		
+		
+
+
+
+		$query=$this->db->get();
+
+		if ($query->num_rows()) {
+			
+			return $query->result_array();
+		}
+
+		else{
+            return false;
+		}
+	
+	}
+
+
+
+
 }
 

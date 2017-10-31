@@ -127,7 +127,7 @@ foreach($css_files as $file): ?>
 
 
                          <li>
-                            <a href="index.html"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
+                            <a href="<?php echo base_url('admin/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
                         
                         </li>
 
