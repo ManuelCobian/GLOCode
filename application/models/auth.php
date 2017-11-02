@@ -25,7 +25,7 @@ class Auth extends CI_Model
 
 	public function getcliente($id = ""){
 
-		$this->db->where('Correo',$id);
+		$this->db->like('Correo',$id);
 		$this->db->from('client');
 		$this->db->limit(1);
 
@@ -36,11 +36,14 @@ class Auth extends CI_Model
 		if ($result->num_rows()>0) {
 			return $result->row_array();
 			# code...
+
 		}
 
 		else{
 			return null;
 		}
+
+		echo $this->db->lastquery();
 	}
 
 

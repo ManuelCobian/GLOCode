@@ -101,10 +101,10 @@ class Login extends CI_Controller
 				$contra=md5($password);
 				
 				$fila =$this->auth->getcliente($email);
-				
+							
 				if (!isset($fila)){
 					
-				  echo "ERROR";
+				  echo "ERROR aqui";
 				}
 				else{
 					if ($fila['Contra']==$contra) {
@@ -112,7 +112,7 @@ class Login extends CI_Controller
 							'email' =>$email , 
 							'id'  => $fila->id,
 							'login'=>true,
-							'nivel'=>$fila['Tipo_usuario']
+							'nivel'=>$fila['nivel_id']
 							);
 							$this->session->set_userdata($data);
 							redirect(base_url('clients'));
