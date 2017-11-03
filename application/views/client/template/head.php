@@ -105,18 +105,21 @@ foreach($css_files as $file): ?>
 
                    
                         <li>
-                            <a href="<?php echo base_url('clients') ?>"><i class="fa fa-car fa-fw"></i>Movimientos en Procesos</a>
+                            <a href="<?php echo base_url('clients/Movimientos') ?>"><i class="fa fa-car fa-fw"></i>Movimientos en Procesos</a>
                         
                         </li>
 
 
                          <li>
-                            <a href="<?php echo base_url('clients') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
+                            <a href="<?php echo base_url('clients/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
                         
                         </li>
 
                 
+                         <li>
+                            <a href="<?php echo base_url('clients/Contacto') ?>"><i class="fa fa-envelope-o"></i>Contacto</a>
                         
+                        </li>
                       
                           
                             <!-- /.nav-second-level -->

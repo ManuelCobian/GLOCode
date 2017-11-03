@@ -27,7 +27,7 @@ font-size: 24px;
                
                 <div class="col-md-8">
             <div class="well well-sm">
-                <form method="post" action="<?php echo base_url('master/enviar_contact'); ?>">
+                <form method="post" action="<?php echo base_url('admin/enviar_contact'); ?>">
                 <div class="row">
                     <div class="col-md-6">
 

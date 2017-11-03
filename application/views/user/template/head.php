@@ -94,6 +94,12 @@ foreach($css_files as $file): ?>
                         <li>
                             <a href="<?php echo base_url('users') ?>"><i class="fa fa-dashboard fa-fw"></i>Panel</a>
                         </li>
+
+
+                          <li>
+                            <a href="<?php echo base_url('users/Clientes') ?>"><i class="fa fa-user fa-fw"></i>Clientes del Provedor</a>
+                        
+                        </li>
                         
 
                            <li>
@@ -105,13 +111,19 @@ foreach($css_files as $file): ?>
 
                    
                         <li>
-                            <a href="<?php echo base_url('users') ?>"><i class="fa fa-car fa-fw"></i>Movimientos en Procesos</a>
+                            <a href="<?php echo base_url('users/Movimientos') ?>"><i class="fa fa-car fa-fw"></i>Movimientos en Procesos</a>
                         
                         </li>
 
 
                          <li>
-                            <a href="<?php echo base_url('users') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
+                            <a href="<?php echo base_url('users/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
+                        
+                        </li>
+
+
+                         <li>
+                            <a href="<?php echo base_url('users/Contacto') ?>"><i class="fa fa-envelope-o"></i>Contacto</a>
                         
                         </li>
 

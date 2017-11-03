@@ -104,7 +104,7 @@ class Login extends CI_Controller
 							
 				if (!isset($fila)){
 					
-				  echo "ERROR aqui";
+				  echo "<H1>USUARIO NO ENCONTRADO</H1>";
 				}
 				else{
 					if ($fila['Contra']==$contra) {

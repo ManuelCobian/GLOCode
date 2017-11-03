@@ -110,7 +110,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('file','provedores','grocery_crud_model');//nombres de los modelos
+$autoload['model'] = array('file','provedores','grocery_crud_model','clientes');//nombres de los modelos
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */

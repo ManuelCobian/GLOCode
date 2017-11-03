@@ -90,6 +90,76 @@ class Users extends CI_Controller
 		}
 
 
+		function Clientes()
+					
+                    {
+							$this->load->library('session');
+						 	 $email=$this->session->userdata('email');
+
+							$provedor=$this->clientes->get_user_id($email);
+				 	try{
+						
+						$this->db = $this->load->database("default", TRUE);
+						
+						$crud = new grocery_CRUD();
+						
+						$crud->set_theme('bootstrap');
+						$crud->set_table('client');
+						$crud->set_primary_key('id'); // Indicar el campo Llave
+						$crud->where('users_id',$provedor['id']);
+						$crud->set_subject('Provedores del Sistema');
+						//$crud->required_fields('Provedores del Sistema');
+						
+						
+						$crud->columns('Nombre','Apellidos','Correo','Telefono','Empresa','RFC','Direccion','nivel_id','users_id'); 
+						$crud->display_as('Nombre','Nombre del Usuario');
+						$crud->display_as('Apellidos','Apellidos del Usuario');
+						$crud->display_as('Direccion','Direccion del Usuario');
+						$crud->display_as('Correo','Correo del Usuario');
+						$crud->display_as('Telefono','Telefono del Usuario');
+						$crud->display_as('Empresa','Empresa del Usuario');
+						$crud->display_as('Direccion','Direccion del Usuario');
+						$crud->display_as('RFC','RFC del Usuario');
+						$crud->display_as('nivel_id','Tipo Usuario');
+						
+						$crud->display_as('users_id','Provedor');
+							
+							
+						
+						
+						$crud->fields('Nombre','Apellidos','Correo','nivel_id','users_id');
+
+						$crud->set_primary_key('id','provedores');
+									$crud->set_relation('users_id','provedores','Correo');
+						
+						
+						$crud->unset_bootstrap();
+						
+						$crud->unset_bootstrap();
+						$crud->unset_add();
+						$crud->unset_delete();
+						$crud->unset_edit();
+						//$crud->unset_jquery();
+						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
+						
+						$output = $crud->render();
+
+						$this->_example_output($output,null);
+						
+						
+
+
+
+					}
+					catch(Exception $e){
+						show_error($e->getMessage().' --- '.$e->getTraceAsString());
+					}
+					
+					
+			}
+
+
+
 
 	    function Provedores()
 		{
@@ -140,6 +210,265 @@ class Users extends CI_Controller
 					}
 
 	
+		}
+
+
+
+		function Movimientos()
+					
+                    {
+							 
+							 $this->load->library('session');
+
+
+
+							 $email=$this->session->userdata('email');
+
+							$provedor=$this->clientes->get_user_id($email);
+
+							
+
+							$clientes=$this->provedores->get_client_id($provedor['id']);
+
+							$id_clientes;
+
+
+							foreach ($clientes as $key ) {
+								
+
+								$id_clientes=$key['id'];
+
+							}
+							
+							 	try{
+									
+									$this->db = $this->load->database("default", TRUE);
+									
+									$crud = new grocery_CRUD();
+									
+									$crud->set_theme('bootstrap');
+									$crud->set_table('movimientos');
+									$crud->where('id_clients',$id_clientes);
+									$crud->set_primary_key('id'); // Indicar el campo Llave
+									$crud->set_subject('Movimientos  del Sistema');
+									//$crud->required_fields('Provedores del Sistema');
+									
+									
+									$crud->columns('Movimiento','Confirmacion','Origen','Destino','id_status','id_clients','ruta','Comentarios'); 
+
+
+									
+									$crud->display_as('Movimiento','Movimiento');
+									$crud->display_as('Confirmacion','Confirmacion');
+									$crud->display_as('Origen','Origen');
+									$crud->display_as('id_status','Estado del Movimiento');
+									$crud->display_as('ruta','Documento del Movimiento');
+									$crud->display_as('Comentarios','Comentarios del Movimiento');
+									$crud->display_as('id_clients','Cliente');
+
+
+
+									
+									
+									
+									$crud->fields('Movimiento','Confirmacion','Origen','Destino','id_status','id_clients','ruta','Comentarios');
+
+
+										$crud->set_field_upload('ruta', RUTA_DOCUMENTOS);
+
+									$crud->set_primary_key('id','client');
+									$crud->set_relation('id_clients','client','Nombre');
+
+								
+
+									//$crud->where('nivel_id','client');
+
+									$crud->unset_bootstrap();
+									//$crud->unset_jquery();
+									$crud->add_action('Hacer Confirmacion', '', '','fa fa-envelope-o"');
+									
+									$output = $crud->render();
+
+									$this->_example_output($output,null);
+									
+									
+
+
+
+								}
+								catch(Exception $e){
+									show_error($e->getMessage().' --- '.$e->getTraceAsString());
+								}	
+					
+					}
+
+
+
+	function Movimientos_Facturas()
+					
+                    {
+							 
+							 $this->load->library('session');
+
+
+
+							 $email=$this->session->userdata('email');
+
+							$provedor=$this->clientes->get_user_id($email);
+
+							
+
+							$clientes=$this->provedores->get_client_id($provedor['id']);
+
+							$movimientos;
+
+							
+
+
+							$id_clientes;
+
+							$movimiento;
+
+
+							foreach ($clientes as $key ) {
+								
+
+								$id_clientes=$key['id'];
+
+								$movimientos=$this->provedores->get_movimientos_id($id_clientes);
+
+							
+
+
+
+							}
+
+							foreach ($movimientos as $key ) {
+									$movimiento=$key['id'];
+
+
+							}
+
+
+
+							
+							 	try{
+									
+									$this->db = $this->load->database("default", TRUE);
+									
+									$crud = new grocery_CRUD();
+									
+									$crud->set_theme('bootstrap');
+									$crud->set_table('movimientos_facturas');
+									$crud->where('id_clients',$id_clientes);
+									
+									$crud->set_primary_key('id'); // Indicar el campo Llave
+									$crud->set_subject('Clientes del Sistema');
+									//$crud->required_fields('Provedores del Sistema');
+									
+									
+									$crud->columns('id_movimiento','id_client','pdf','status_factura'); 
+
+
+									
+									$crud->display_as('id_movimiento','Movimiento');
+									$crud->display_as('id_client','Cliente');
+									$crud->display_as('pdf','Factura');
+
+									$crud->display_as('status_factura','Estado de la Factura');
+									
+
+									
+									
+									
+									$crud->fields('id_movimiento','id_client','pdf','status_factura');
+
+
+										$crud->set_field_upload('pdf', RUTA_DOCUMENTOS);
+										$crud->set_field_upload('xml', RUTA_DOCUMENTOS);
+
+									$crud->set_primary_key('id','client');
+									$crud->set_relation('id_client','client','Nombre');
+
+
+									$crud->set_primary_key('id','movimientos');
+									$crud->set_relation('id_movimiento','movimientos','movimiento');
+
+								
+
+									//$crud->where('nivel_id','client');
+
+									$crud->unset_bootstrap();
+									//$crud->unset_jquery();
+									$crud->add_action('Hacer Confirmacion', '', '','fa fa-list fa-fw""');
+									
+									$output = $crud->render();
+
+									$this->_example_output($output,null);
+									
+									
+
+
+
+								}
+								catch(Exception $e){
+									show_error($e->getMessage().' --- '.$e->getTraceAsString());
+								}	
+					
+					}
+
+
+
+
+		function Contacto(){
+					 $this->load->library('session');
+
+				$pagina="user/web/contact";
+				$app="Home";
+				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
+				$title="Mis Horarios";			
+			
+		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
+				
+
+		}
+
+
+		function enviar_contact(){
+
+
+			
+			
+			
+
+
+
+			$nombre=$this->input->post('nombre');
+			$correo=$this->input->post('correo');
+			$mesaje=$this->input->post('message');
+			$asunto=$this->input->post('subject');
+
+
+					$denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    $sdestinatario=$correo; //cuenta destino
+                    $ssubject="El usuario quiere contactarse ".$nombre."para"." ".$asunto; //subject
+                    $shtml=$mesaje; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                   
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+
+              //
+                    redirect(base_url('users'));
+
+
 		}
 	
 

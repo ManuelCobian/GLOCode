@@ -238,7 +238,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="<?php echo base_url('master/'); ?>"><i class="fa fa-dashboard fa-fw"></i>Panel</a>
+                            <a href="<?php echo base_url('clients/'); ?>"><i class="fa fa-dashboard fa-fw"></i>Panel</a>
                         </li>
 
                         <li>

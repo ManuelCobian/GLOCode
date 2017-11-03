@@ -316,7 +316,7 @@ class Admin extends CI_Controller
 									$crud->set_table('movimientos');
 									$crud->where('id_clients',$id_clientes);
 									$crud->set_primary_key('id'); // Indicar el campo Llave
-									$crud->set_subject('Clientes del Sistema');
+									$crud->set_subject('Movimientos  del Sistema');
 									//$crud->required_fields('Provedores del Sistema');
 									
 									
@@ -338,7 +338,7 @@ class Admin extends CI_Controller
 									
 									
 									$crud->fields('Movimiento','Confirmacion','Origen','Destino','id_status','id_clients','ruta','Comentarios');
-
+										$crud->where('id_clients',$id_clientes);
 
 										$crud->set_field_upload('ruta', RUTA_DOCUMENTOS);
 
@@ -525,22 +525,75 @@ class Admin extends CI_Controller
 		}
 
 
-		function enviar_correo($correo,$nombre,$tipo){
+			function enviar_correo($correo,$nombre,$tipo){
 					
 		switch ($tipo) {
 			case 'admin':
-				echo "correo admin";
+					$denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    $sdestinatario=$correo; //cuenta destino
+                    $ssubject="Estimado Administrador"." ".$nombre; //subject
+                    $shtml="Glo Logistics te da la bienvenida a su portal Transportation Managment
+					System (TMS), para terminar su registro ingrese a este url. 
+					http://glologistics.com.mx/php/admin.php"; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                   
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+			
 				break;
 
 			case 'user':
+
+					$denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    $sdestinatario=$correo; //cuenta destino
+                    $ssubject="Estimado Usuario"." ".$nombre; //subject
+                    $shtml="Glo Logistics te da la bienvenida a su portal Transportation Managment
+					System (TMS), para terminar su registro ingrese a este url. 
+					http://glologistics.com.mx/php/user.php"; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                   
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+
+
 				# code...
-			echo "correo user";
+					
 				break;
 
 			case 'client':
 				# code...
 
-			echo "correo client";
+					$denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    $sdestinatario=$correo; //cuenta destino
+                    $ssubject="Estimado Administrador"." ".$nombre; //subject
+                    $shtml="Glo Logistics te da la bienvenida a su portal Transportation Managment
+					System (TMS), para terminar su registro ingrese a este url. 
+					http://glologistics.com.mx/php/clientes.php"; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                   
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
 				break;
 			
 			default:
@@ -548,9 +601,64 @@ class Admin extends CI_Controller
 				break;
 		}
 
+		redirect(base_url('admin'));
+
 
 
 		}
+
+		function Contacto(){
+					 $this->load->library('session');
+
+				$pagina="admin/web/contact";
+				$app="Home";
+				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
+				$title="Mis Horarios";			
+			
+		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
+				
+
+		}
+
+
+		function enviar_contact(){
+
+
+			
+			
+			
+
+
+
+			$nombre=$this->input->post('nombre');
+			$correo=$this->input->post('correo');
+			$mesaje=$this->input->post('message');
+			$asunto=$this->input->post('subject');
+
+
+					$denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    $sdestinatario=$correo; //cuenta destino
+                    $ssubject="El usuario quiere contactarse ".$nombre."para"." ".$asunto; //subject
+                    $shtml=$mesaje; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                   
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+
+              //
+                    redirect(base_url('admin'));
+
+
+		}
+
+
 
 
 

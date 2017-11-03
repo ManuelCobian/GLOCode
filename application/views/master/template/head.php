@@ -121,8 +121,15 @@ foreach($css_files as $file): ?>
                         </li>
 
 
+
+                        <li>
+                            <a href="<?php echo base_url('master/Movimientos') ?>"><i class="fa fa-car fa-fw"></i>Movimientos en Procesos</a>
+                        
+                        </li>
+
+
                          <li>
-                            <a href="<?php echo base_url('master/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
+                            <a href="<?php echo base_url('master/Contacto') ?>"><i class="fa fa-envelope-o"></i>Contacto</a>
                         
                         </li>
 

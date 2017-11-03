@@ -130,7 +130,11 @@ foreach($css_files as $file): ?>
                             <a href="<?php echo base_url('admin/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
                         
                         </li>
-
+                        
+                         <li>
+                            <a href="<?php echo base_url('admin/Contacto') ?>"><i class="fa fa-envelope-o"></i>Contacto</a>
+                        
+                        </li>
 
                         
                       
