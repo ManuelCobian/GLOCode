@@ -31,7 +31,7 @@ class Clients extends CI_Controller
 
 		 if (!$this->session->userdata('login')) 
         	{
-        			redirect(base_url('/'));
+        			redirect(base_url('http://glologistics.com.mx/login.html'));
         	}
 
         	else{

@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    
 <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -19,6 +20,16 @@ foreach($css_files as $file): ?>
     <script src="<?php echo $file; ?>"></script>
 <?php endforeach; ?>
     
+
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
+    
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
+    
+   
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url() ?>plantilla/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +67,7 @@ foreach($css_files as $file): ?>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url() ?>admin">GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0</a>
+                <a class="navbar-brand" href="<?php echo base_url() ?>master">GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -87,12 +98,7 @@ foreach($css_files as $file): ?>
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                             <center> <a href="<?php echo base_url('admin') ?>"><?php echo $this->session->userdata('email'); ?></a></center>  
                             </div>
                             <!-- /input-group -->
                         </li>
@@ -126,16 +132,19 @@ foreach($css_files as $file): ?>
                         </li>
 
 
+
                          <li>
                             <a href="<?php echo base_url('admin/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
                         
                         </li>
-                        
+
+
                          <li>
                             <a href="<?php echo base_url('admin/Contacto') ?>"><i class="fa fa-envelope-o"></i>Contacto</a>
                         
                         </li>
 
+                
                         
                       
                           
@@ -149,6 +158,7 @@ foreach($css_files as $file): ?>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
+            
         </nav>
 
 
@@ -157,9 +167,27 @@ foreach($css_files as $file): ?>
         <?php if(isset($pagina_interna)) { $this->load->view($pagina_interna);  ?>
     <!-- /#wrapper -->
 
+  
+    
+
+
     <!-- jQuery -->
     <script src="<?php echo base_url("plantilla/vendor/") ?>/jquery/jquery.min.js"></script>
+  
 
+  <footer class="sticky-footer">
+      <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">Copyright © 2017 GLO LOGISTICS . Todos los derechos reservados.
+           
+      </p>
+
+      <a href="#" class="navbar-btn btn-danger btn pull-right">
+      <span class="glyphicon glyphicon-star"></span>GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0</a>
+      
+     
+    </div>
+    </footer>
     <?php   
         }
      ?>

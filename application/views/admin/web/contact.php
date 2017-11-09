@@ -27,7 +27,7 @@ font-size: 24px;
                
                 <div class="col-md-8">
             <div class="well well-sm">
-                <form method="post" action="<?php echo base_url('admin/enviar_contact'); ?>">
+                <form method="post" action="<?php echo base_url('master/enviar_contact'); ?>">
                 <div class="row">
                     <div class="col-md-6">
 
@@ -118,4 +118,16 @@ font-size: 24px;
     <!-- /#wrapper -->
 
  
+  <footer class="sticky-footer">
+      <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">Copyright © 2017 GLO LOGISTICS . Todos los derechos reservados.
+           
+      </p>
 
+      <a href="#" class="navbar-btn btn-danger btn pull-right">
+      <span class="glyphicon glyphicon-star"></span>GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0</a>
+      
+     
+    </div>
+    </footer>

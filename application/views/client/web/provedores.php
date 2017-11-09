@@ -40,5 +40,17 @@
     </div>
     <!-- /#wrapper -->
 
+<footer class="sticky-footer">
+      <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">Copyright © 2017 GLO LOGISTICS . Todos los derechos reservados.
+           
+      </p>
 
+      <a href="#" class="navbar-btn btn-danger btn pull-right">
+      <span class="glyphicon glyphicon-star"></span>GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0</a>
+      
+     
+    </div>
+    </footer>
 

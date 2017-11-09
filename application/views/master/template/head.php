@@ -123,7 +123,7 @@ foreach($css_files as $file): ?>
 
 
                          <li>
-                            <a href="<?php echo base_url('admin/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
+                            <a href="<?php echo base_url('master/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
                         
                         </li>
 
@@ -158,6 +158,21 @@ foreach($css_files as $file): ?>
 
     <!-- jQuery -->
     <script src="<?php echo base_url("plantilla/vendor/") ?>/jquery/jquery.min.js"></script>
+
+
+    <footer class="sticky-footer">
+      <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">Copyright © 2017 GLO LOGISTICS . Todos los derechos reservados.
+           
+      </p>
+
+      <a href="#" class="navbar-btn btn-danger btn pull-right">
+      <span class="glyphicon glyphicon-star"></span>GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0</a>
+      
+     
+    </div>
+    </footer>
 
     <?php   
         }

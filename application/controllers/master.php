@@ -33,7 +33,7 @@ class Master extends CI_Controller
 
 		 if (!$this->session->userdata('login')) 
         	{
-        			redirect(base_url('/'));
+        			redirect(base_url('http://glologistics.com.mx/login.html'));
         	}
 
         	else{
@@ -122,7 +122,8 @@ class Master extends CI_Controller
 						$crud->unset_bootstrap();
 						//$crud->unset_jquery();
 						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
-						
+						//$crud->unset_delete();
+						$crud->unset_edit();
 						$output = $crud->render();
 
 						$this->_example_output($output,null);
@@ -178,7 +179,7 @@ class Master extends CI_Controller
 							
 						
 						
-						$crud->fields('Nombre','Apellidos','Correo','nivel_id','users_id');
+						$crud->fields('Nombre','Apellidos','Correo','users_id');
 
 						$crud->set_primary_key('id','provedores');
 									$crud->set_relation('users_id','provedores','Correo');
@@ -186,11 +187,11 @@ class Master extends CI_Controller
 						
 						$crud->unset_bootstrap();
 						
-						$crud->unset_delete();
-						$crud->unset_edit();
+						
 						//$crud->unset_jquery();
 						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
-						
+						//$crud->unset_delete();
+						$crud->unset_edit();
 						$output = $crud->render();
 
 						$this->_example_output($output,null);
@@ -253,9 +254,9 @@ class Master extends CI_Controller
 						
 						
 						$crud->unset_bootstrap();
-						
-						$crud->unset_delete();
+						//$crud->unset_delete();
 						$crud->unset_edit();
+						
 						//$crud->unset_jquery();
 						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
 						
@@ -343,7 +344,6 @@ class Master extends CI_Controller
 
 
 										$crud->set_field_upload('ruta', RUTA_DOCUMENTOS);
-										$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'__movimiento'));
 
 									$crud->set_primary_key('id','client');
 									$crud->set_relation('id_clients','client','Nombre');
@@ -398,7 +398,7 @@ class Master extends CI_Controller
 									$crud->set_table('movimientos_facturas');
 									//$crud->where('id_clients',$id_clientes );
 									$crud->set_primary_key('id'); // Indicar el campo Llave
-									$crud->set_subject('Confirmaciones & Facturas');
+									$crud->set_subject('Clientes del Sistema');
 									//$crud->required_fields('Provedores del Sistema');
 									
 									
@@ -491,43 +491,10 @@ class Master extends CI_Controller
 
 			$tipo="client";
 
-			return base_url('master/enviar_correo/'.$row->Correo.'/'.$row->Movimientoe.'/'.$tipo);
+			return base_url('master/enviar_correo/'.$row->Correo.'/'.$row->Nombre.'/'.$tipo);
 	
 			
 		}
-
-
-
-		function _movimiento($primary_key, $row){
-			return base_url('master/enviar_correo/'.$row->Correo.'/'.$row->Movimientoe.'/'.$row->id_status);
-	
-
-		}
-
-
-
-        function enviar_correo_mo($email,$interno,$externo,$movimiento,$estado){
-
-
-                    $denombre="Glo Logistics";
-                    $deemail="soporte@glologistics.com";
-                    $sfrom="soporte@glologistics.com"; //cuenta que envia
-                    $sBCC=$interno; //me envio una copia oculta
-                    $sBCCo=$externo; //me envio una copia oculta
-                    $sdestinatario=$email; //cuenta destino
-                    $ssubject="Nueva Actividad en sus movimientos"; //subject
-                    $shtml="Estimado cliente Se hizo una  nuevo  Movimiento con el estado"."  ".$estado; 
-                    $encabezados = "MIME-Version: 1.0\n";
-                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
-                    $encabezados .= "From: $denombre <$deemail>\n";
-                    $encabezados .= "X-Sender: <$sfrom>\n";
-                    $encabezados .= "BCC: <$sBCC>\n"; //aqui fijo el BCC
-                    $encabezados .= "BCco: <$sBCCo>\n"; //aqui fijo el BCCo
-                    $encabezados .= "X-Mailer: PHP\n";
-                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
-                    $encabezados .= "Return-Path: <$sfrom>\n";
-                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
-        }
 
 
 		function enviar_correo($correo,$nombre,$tipo){

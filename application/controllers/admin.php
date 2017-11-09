@@ -33,7 +33,7 @@ class Admin extends CI_Controller
 
 		 if (!$this->session->userdata('login')) 
         	{
-        			redirect(base_url('/'));
+        			redirect(base_url('http://glologistics.com.mx/login.html'));
         	}
 
         	else{
@@ -66,7 +66,7 @@ class Admin extends CI_Controller
 				
 					else{
 		        	$this->session->sess_destroy();//para destruir sesion
-					redirect(base_url('/'));
+					redirect(base_url('http://glologistics.com.mx/login.html'));
         		 }
 
 
@@ -124,7 +124,7 @@ class Admin extends CI_Controller
 						$crud->unset_delete();
 						$crud->unset_edit();
 						//$crud->unset_jquery();
-						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
+						//$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
 						
 						$output = $crud->render();
 
@@ -160,7 +160,7 @@ class Admin extends CI_Controller
 						$crud->set_theme('bootstrap');
 						$crud->set_table('users');
 						$crud->set_primary_key('id'); // Indicar el campo Llave
-						$crud->where('users_id',$provedor['id']);
+						//$crud->where('users_id',$provedor['id']);
 						$crud->set_subject('Provedores del Sistema');
 						//$crud->required_fields('Provedores del Sistema');
 						
@@ -189,7 +189,7 @@ class Admin extends CI_Controller
 						
 						$crud->unset_bootstrap();
 						
-						$crud->unset_delete();
+						//$crud->unset_delete();
 						$crud->unset_edit();
 						//$crud->unset_jquery();
 						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
@@ -228,7 +228,7 @@ class Admin extends CI_Controller
 						$crud->set_theme('bootstrap');
 						$crud->set_table('client');
 						$crud->set_primary_key('id'); // Indicar el campo Llave
-						$crud->where('users_id',$provedor['id']);
+						//$crud->where('users_id',$provedor['id']);
 						$crud->set_subject('Provedores del Sistema');
 						//$crud->required_fields('Provedores del Sistema');
 						
@@ -257,7 +257,7 @@ class Admin extends CI_Controller
 						
 						$crud->unset_bootstrap();
 						
-						$crud->unset_delete();
+						//$crud->unset_delete();
 						$crud->unset_edit();
 						//$crud->unset_jquery();
 						$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_admin'));
@@ -314,9 +314,9 @@ class Admin extends CI_Controller
 									
 									$crud->set_theme('bootstrap');
 									$crud->set_table('movimientos');
-									$crud->where('id_clients',$id_clientes);
+									//$crud->where('id_clients',$id_clientes);
 									$crud->set_primary_key('id'); // Indicar el campo Llave
-									$crud->set_subject('Movimientos  del Sistema');
+									$crud->set_subject('Clientes del Sistema');
 									//$crud->required_fields('Provedores del Sistema');
 									
 									
@@ -338,7 +338,7 @@ class Admin extends CI_Controller
 									
 									
 									$crud->fields('Movimiento','Confirmacion','Origen','Destino','id_status','id_clients','ruta','Comentarios');
-										$crud->where('id_clients',$id_clientes);
+
 
 										$crud->set_field_upload('ruta', RUTA_DOCUMENTOS);
 
@@ -423,10 +423,10 @@ class Admin extends CI_Controller
 									
 									$crud->set_theme('bootstrap');
 									$crud->set_table('movimientos_facturas');
-									$crud->where('id_clients',$id_clientes);
+									//$crud->where('id_clients',$id_clientes);
 									
 									$crud->set_primary_key('id'); // Indicar el campo Llave
-									$crud->set_subject('Confirmaciones & Facturas');
+									$crud->set_subject('Clientes del Sistema');
 									//$crud->required_fields('Provedores del Sistema');
 									
 									
@@ -610,7 +610,7 @@ class Admin extends CI_Controller
 		function Contacto(){
 					 $this->load->library('session');
 
-				$pagina="admin/web/contact";
+				$pagina="master/web/contact";
 				$app="Home";
 				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
 				$title="Mis Horarios";			
@@ -640,7 +640,7 @@ class Admin extends CI_Controller
                     $deemail="soporte@glologistics.com";
                     $sfrom="soporte@glologistics.com"; //cuenta que envia
                     $sdestinatario=$correo; //cuenta destino
-                    $ssubject="El usuario quiere contactarse ".$nombre."para"." ".$asunto; //subject
+                    $ssubject="El usuario quiere contactarse ".$nombre; //subject
                     $shtml=$mesaje; 
                     $encabezados = "MIME-Version: 1.0\n";
                     $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
@@ -652,8 +652,8 @@ class Admin extends CI_Controller
                     $encabezados .= "Return-Path: <$sfrom>\n";
                     mail($sdestinatario,$ssubject,$shtml,$encabezados);
 
-              //
                     redirect(base_url('admin'));
+
 
 
 		}
