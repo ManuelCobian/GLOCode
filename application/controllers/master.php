@@ -398,7 +398,7 @@ class Master extends CI_Controller
 									$crud->set_table('movimientos_facturas');
 									//$crud->where('id_clients',$id_clientes );
 									$crud->set_primary_key('id'); // Indicar el campo Llave
-									$crud->set_subject('Clientes del Sistema');
+									$crud->set_subject('Confirmaciones & Facturas');
 									//$crud->required_fields('Provedores del Sistema');
 									
 									
