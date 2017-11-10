@@ -354,7 +354,9 @@ class Master extends CI_Controller
 
 									$crud->unset_bootstrap();
 									//$crud->unset_jquery();
-									$crud->add_action('Hacer Confirmacion', '', '','fa fa-list fa-fw""');
+									//$crud->add_action('Hacer Confirmacion', '', '','fa fa-list fa-fw""');
+
+									$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_mov'));
 									
 									$output = $crud->render();
 
@@ -497,6 +499,24 @@ class Master extends CI_Controller
 		}
 
 
+
+		function _mov($primary_key, $row)
+		{
+			
+			//$this->Mcontacto->resolver($row->id_coment);
+
+
+			
+
+			return base_url('master/confirm_movimiento/'.$row->Origen.'/'.$row->Destino);
+	
+			
+		}
+
+
+
+
+
 		function enviar_correo($correo,$nombre,$tipo){
 					
 		switch ($tipo) {
@@ -591,6 +611,20 @@ class Master extends CI_Controller
 				
 
 		}
+
+		function confirm_movimiento($origen,$destino){
+			
+					 $this->load->library('session');
+
+				$pagina="master/web/movimiento_form";
+				$app="Home";
+				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
+				$title="Mis Horarios";			
+			
+		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
+		}
+
+		
 
 
 		function enviar_contact(){
