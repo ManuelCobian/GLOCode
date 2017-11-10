@@ -346,7 +346,7 @@ class Master extends CI_Controller
 										$crud->set_field_upload('ruta', RUTA_DOCUMENTOS);
 
 									$crud->set_primary_key('id','client');
-									$crud->set_relation('id_clients','client','Nombre');
+									$crud->set_relation('id_clients','client','Correo');
 
 								
 
@@ -508,7 +508,7 @@ class Master extends CI_Controller
 
 			
 
-			return base_url('master/confirm_movimiento/'.$row->Origen.'/'.$row->Destino);
+			return base_url('master/confirm_movimiento/'.$row->Origen.'/'.$row->Destino.'/'.$row->Movimiento.'/'.$row->id_clients);
 	
 			
 		}
@@ -612,16 +612,21 @@ class Master extends CI_Controller
 
 		}
 
-		function confirm_movimiento($origen,$destino){
+		function confirm_movimiento($origen,$destino,$movimiento,$id_clients){
 			
 					 $this->load->library('session');
 
 				$pagina="master/web/movimiento_form";
 				$app="Home";
 				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
-				$title="Mis Horarios";			
+				$title="Mis Horarios";
+				$data['origen']=$origen;
+
+				$co=$this->provedores->get_emalil($id_clients);
+				
+
 			
-		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
+		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'co'=>$co['Correo'],'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
 		}
 
 		
@@ -662,6 +667,46 @@ class Master extends CI_Controller
 
 
 
+		}
+
+
+		function enviar_movimiento(){
+
+
+			$origen=$this->input->post('origen');
+			$destino=$this->input->post('destino');
+			$cc=$this->input->post('cc');
+			$c1=$this->input->post('c1');
+			$c2=$this->input->post('c2');
+			$c3=$this->input->post('c3');
+			$c4=$this->input->post('c4');
+			$mensaje=$this->input->post('mensaje');
+
+			$correos=array($c1,$c2,$c3,$c4);
+
+
+
+
+					$denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    $sBCC=$cc; //me envio una copia oculta
+                    $sBCCo=$correos; //me envio una copia oculta
+                    $sdestinatario=$cc; //cuenta destino
+                    $ssubject="Nuevo Movimiento Registrado"; //subject
+                    $shtml=$mensaje." ". $origen."  "." y con un destino a"." ".$Destino; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                    $encabezados .= "BCC: <$sBCC>\n"; //aqui fijo el BCC
+                    $encabezados .= "BCco: <$sBCCo>\n"; //aqui fijo el BCCo
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+
+                    redirect(base_url('master'));
 		}
 
 

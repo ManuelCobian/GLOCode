@@ -29,7 +29,24 @@ class provedores extends CI_Model
 	}
 
 
-	
+	function get_emalil($id=''){
+
+		$this->db->select('Correo');
+		$this->db->from('client');
+		$this->db->where('id',$id);
+
+		$query=$this->db->get();
+
+		if ($query->num_rows()) {
+			
+			return $query->row_array();
+		}
+
+		else{
+            return false;
+		}
+
+	}
 
 
 
