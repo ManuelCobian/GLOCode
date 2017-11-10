@@ -18,6 +18,7 @@ class Admin extends CI_Controller
 			$this->load->helper('url');
 
 			$this->load->library('grocery_CRUD');
+			$this->load->model('grocery_crud_model');
 			
 			$this->load->library('email');
 			$this->load->library('upload');
@@ -351,7 +352,7 @@ class Admin extends CI_Controller
 
 									$crud->unset_bootstrap();
 									//$crud->unset_jquery();
-									$crud->add_action('Hacer Confirmacion', '', '','fa fa-envelope-o"');
+									$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_mov'));
 									
 									$output = $crud->render();
 
@@ -525,6 +526,22 @@ class Admin extends CI_Controller
 		}
 
 
+
+		function _mov($primary_key, $row)
+		{
+			
+			//$this->Mcontacto->resolver($row->id_coment);
+
+
+			
+
+			return base_url('admin/confirm_movimiento/'.$row->Origen.'/'.$row->Destino.'/'.$row->Movimiento.'/'.$row->id_clients);
+	
+			
+		}
+
+
+
 			function enviar_correo($correo,$nombre,$tipo){
 					
 		switch ($tipo) {
@@ -610,7 +627,7 @@ class Admin extends CI_Controller
 		function Contacto(){
 					 $this->load->library('session');
 
-				$pagina="master/web/contact";
+				$pagina="admin/web/contact";
 				$app="Home";
 				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
 				$title="Mis Horarios";			
@@ -618,6 +635,24 @@ class Admin extends CI_Controller
 		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
 				
 
+		}
+
+
+		function confirm_movimiento($origen,$destino,$movimiento,$id_clients){
+			
+					 $this->load->library('session');
+
+				$pagina="admin/web/movimiento_form";
+				$app="Home";
+				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
+				$title="Mis Horarios";
+				$data['origen']=$origen;
+
+				$co=$this->provedores->get_emalil($id_clients);
+				
+
+			
+		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'co'=>$co['Correo'],'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
 		}
 
 
@@ -657,6 +692,50 @@ class Admin extends CI_Controller
 
 
 		}
+
+
+
+		function enviar_movimiento(){
+
+
+			$origen=$this->input->post('origen');
+			$destino=$this->input->post('destino');
+			$cc=$this->input->post('cc');
+			$c1=$this->input->post('c1');
+			$c2=$this->input->post('c2');
+			$c3=$this->input->post('c3');
+			
+			$mensaje=$this->input->post('mensaje');
+
+			$correos=array($c1,$c2,$c3,$c4);
+
+
+
+
+
+
+					$denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    $sBCC=$cc; //me envio una copia oculta
+                    $sBCCo=$correos; //me envio una copia oculta
+                    $sdestinatario=$cc; //cuenta destino
+                    $ssubject="Nuevo Movimiento Registrado"; //subject
+                    $shtml=$mensaje." ". $origen."  "." y con un destino a"." ".$Destino; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                    $encabezados .= "BCC: <$sBCC>\n"; //aqui fijo el BCC
+                    $encabezados .= "BCco: <$sBCCo>\n"; //aqui fijo el BCCo
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+
+                    redirect(base_url('admin'));
+		}
+
 
 
 
