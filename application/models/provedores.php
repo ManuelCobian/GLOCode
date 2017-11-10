@@ -50,6 +50,33 @@ class provedores extends CI_Model
 
 
 
+
+	function get_factura($id=''){
+
+		$this->db->select('*');
+		$this->db->from('movimientos_facturas');
+		$this->db->join('movimientos', 'movimientos.id = movimientos_facturas.users_id');
+		$this->db->where('id_movimiento',$id);
+
+		$query=$this->db->get();
+
+		if ($query->num_rows()) {
+			
+			return $query->result_array();
+		}
+
+		else{
+            return false;
+		}
+
+	}
+
+
+
+	
+
+
+
 	function get_client_id($id){
 
 		$this->db->select('*');

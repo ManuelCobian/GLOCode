@@ -505,6 +505,48 @@ class Users extends CI_Controller
 		}
 
 
+
+		function enviar_movimiento(){
+
+
+			$origen=$this->input->post('origen');
+			$destino=$this->input->post('destino');
+			$cc=$this->input->post('cc');
+			$c1=$this->input->post('c1');
+			$c2=$this->input->post('c2');
+			$c3=$this->input->post('c3');
+			$c4=$this->input->post('c4');
+			$mensaje=$this->input->post('mensaje');
+
+			$correos=array($c1,$c2,$c3,$c4);
+
+
+
+
+					$denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    $sBCC=$cc; //me envio una copia oculta
+                    $sBCCo=$correos; //me envio una copia oculta
+                    $sdestinatario=$cc; //cuenta destino
+                    $ssubject="Nuevo Movimiento Registrado"; //subject
+                    $shtml=$mensaje." ". $origen."  "." y con un destino a"." ".$Destino; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                    $encabezados .= "BCC: <$sBCC>\n"; //aqui fijo el BCC
+                    $encabezados .= "BCco: <$sBCCo>\n"; //aqui fijo el BCCo
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+
+                    redirect(base_url('users'));
+		}
+
+
+
 }
 
 
