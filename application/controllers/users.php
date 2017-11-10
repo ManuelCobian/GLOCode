@@ -275,6 +275,7 @@ class Users extends CI_Controller
 
 
 										$crud->set_field_upload('ruta', RUTA_DOCUMENTOS);
+										
 
 									$crud->set_primary_key('id','client');
 									$crud->set_relation('id_clients','client','Nombre');
@@ -285,7 +286,7 @@ class Users extends CI_Controller
 
 									$crud->unset_bootstrap();
 									//$crud->unset_jquery();
-									$crud->add_action('Hacer Confirmacion', '', '','fa fa-envelope-o"');
+										$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_mov'));
 									
 									$output = $crud->render();
 
@@ -471,7 +472,37 @@ class Users extends CI_Controller
 
 		}
 	
+		function _mov($primary_key, $row)
+		{
+			
+			//$this->Mcontacto->resolver($row->id_coment);
 
+
+			
+
+			return base_url('users/confirm_movimiento/'.$row->Origen.'/'.$row->Destino.'/'.$row->Movimiento.'/'.$row->id_clients);
+	
+			
+		}
+
+
+
+		function confirm_movimiento($origen,$destino,$movimiento,$id_clients){
+			
+					 $this->load->library('session');
+
+				$pagina="user/web/movimiento_form";
+				$app="Home";
+				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
+				$title="Mis Horarios";
+				$data['origen']=$origen;
+
+				$co=$this->provedores->get_emalil($id_clients);
+				
+
+			
+		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'co'=>$co['Correo'],'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
+		}
 
 
 }
