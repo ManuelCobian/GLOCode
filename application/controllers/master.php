@@ -658,8 +658,19 @@ class Master extends CI_Controller
 				$title="Mis Horarios";
 				$data['origen']=$origen;
 
-				$co=$this->provedores->get_emalil($id_clients);
+				$co=$this->provedores->get_factura($movimiento);
+
+
+				var_dump($co);
+				die();
 				
+
+				foreach ($co as $key ) {
+								
+
+								$id_clientes=$key['id'];
+							}
+
 
 			
 		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'co'=>$co['Correo'],'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );

@@ -55,7 +55,7 @@ class provedores extends CI_Model
 
 		$this->db->select('*');
 		$this->db->from('movimientos_facturas');
-		$this->db->join('movimientos', 'movimientos.id = movimientos_facturas.users_id');
+		$this->db->join('movimientos', 'movimientos.id = movimientos_facturas.id_movimiento');
 		$this->db->where('id_movimiento',$id);
 
 		$query=$this->db->get();
