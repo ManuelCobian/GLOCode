@@ -464,8 +464,9 @@ class Admin extends CI_Controller
 
 									$crud->unset_bootstrap();
 									//$crud->unset_jquery();
-									$crud->add_action('Hacer Confirmacion', '', '','fa fa-list fa-fw""');
-									
+									$crud->add_action('Enviar Confirmacion', '', '','fa fa-envelope-o"', array($this,'_movfac'));
+
+
 									$output = $crud->render();
 
 									$this->_example_output($output,null);
@@ -539,6 +540,21 @@ class Admin extends CI_Controller
 	
 			
 		}
+
+
+		function _movfac($primary_key, $row)
+		{
+			
+			//$this->Mcontacto->resolver($row->id_coment);
+
+
+			
+
+			return base_url('admin/confirm_movimientos/'.$row->id_movimiento.'/'.$row->id_client);
+	
+			
+		}
+
 
 
 
@@ -637,6 +653,25 @@ class Admin extends CI_Controller
 
 		}
 
+		function Profile(){
+					 $this->load->library('session');
+
+					 $email=$this->session->userdata('email');
+
+					  $perfil=$this->provedores->get_master($email);
+
+					 
+
+				$pagina="admin/web/profile";
+				$app="Home";
+				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
+				$title="Mis Horarios";			
+			
+		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'perfil'=>$perfil,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
+				
+
+		}
+
 
 		function confirm_movimiento($origen,$destino,$movimiento,$id_clients){
 			
@@ -654,6 +689,35 @@ class Admin extends CI_Controller
 			
 		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'co'=>$co['Correo'],'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
 		}
+
+
+
+		function confirm_movimientos($movimiento,$cliente){
+			
+					 $this->load->library('session');
+				$pagina="admin/web/movimiento_fac_form";
+				
+				$app="Home";
+				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
+				$title="Mis Horarios";
+				$data['origen']=$origen;
+
+				$co=$this->provedores->get_factura($movimiento);
+				
+				foreach ($co as $key ) {
+								
+
+								$movimientos=$key['Movimiento'];
+								$cliente=$key['Nombre'];
+								$co_clien=$key['Correo'];
+
+
+
+							}
+
+		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'movimiento'=>$movimiento,'origen'=>$origen,'destino'=>$destino,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'co'=>$co_clien,'movimiento'=>$movimientos,'client'=>$cliente,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
+		}
+
 
 
 		function enviar_contact(){
@@ -733,7 +797,112 @@ class Admin extends CI_Controller
                     $encabezados .= "Return-Path: <$sfrom>\n";
                     mail($sdestinatario,$ssubject,$shtml,$encabezados);
 
-                    redirect(base_url('admin'));
+                     $this->repetir($mensaje,$c3);
+		}
+
+
+
+
+		function enviar_movimientos(){
+
+
+			$movimiento=$this->input->post('movimiento');
+			$cliente=$this->input->post('client');
+			$cc=$this->input->post('cc');
+			$c1=$this->input->post('c1');
+			$c2=$this->input->post('c2');
+			$c3=$this->input->post('c3');
+			
+			$mensaje=$this->input->post('mensaje');
+
+			$correos=array($c1,$c2,$c3);
+
+
+
+
+					$denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    $sBCC=$cc; //me envio una copia oculta
+                    $sBCCo=$correos; //me envio una copia oculta
+                    $sdestinatario=$cc; //cuenta destino
+                    $ssubject="Nueva Confirmacion Registrada"; //subject
+                    $shtml=$mensaje; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                    $encabezados .= "BCC: <$sBCC>\n"; //aqui fijo el BCC
+                    $encabezados .= "BCco: <$sBCCo>\n"; //aqui fijo el BCCo
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+
+
+                    $this->repetir_mo($mensaje,$c3);
+                   
+		}
+
+
+
+		function repetir($mensaje,$c3){
+		
+                  	
+		    $denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    //$sBCC=$c2; //me envio una copia oculta
+                    //$sBCCo=$c1; //me envio una copia oculta
+                    $sdestinatario=$c3; //cuenta destino
+                    $ssubject="Nuevo Movimiento Registrado"; //subject
+                    $shtml=$mensaje; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                   // $encabezados .= "BCC: <$sBCC>\n"; //aqui fijo el BCC
+                   // $encabezados .= "BCco: <$sBCCo>\n"; //aqui fijo el BCCo
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+
+
+			 redirect(base_url('admin'));
+
+
+		}
+
+
+
+
+		function repetir_mo($mensaje,$c3){
+		
+                  	
+		    $denombre="Glo Logistics";
+                    $deemail="soporte@glologistics.com";
+                    $sfrom="soporte@glologistics.com"; //cuenta que envia
+                    //$sBCC=$c2; //me envio una copia oculta
+                    //$sBCCo=$c1; //me envio una copia oculta
+                    $sdestinatario=$c3; //cuenta destino
+                    $ssubject="Nuevo Movimiento Registrado"; //subject
+                    $shtml=$mensaje; 
+                    $encabezados = "MIME-Version: 1.0\n";
+                    $encabezados .= "Content-type: text/html; charset=iso-8859-1\n";
+                    $encabezados .= "From: $denombre <$deemail>\n";
+                    $encabezados .= "X-Sender: <$sfrom>\n";
+                   // $encabezados .= "BCC: <$sBCC>\n"; //aqui fijo el BCC
+                   // $encabezados .= "BCco: <$sBCCo>\n"; //aqui fijo el BCCo
+                    $encabezados .= "X-Mailer: PHP\n";
+                    $encabezados .= "X-Priority: 1\n"; // fijo prioridad
+                    $encabezados .= "Return-Path: <$sfrom>\n";
+                    mail($sdestinatario,$ssubject,$shtml,$encabezados);
+
+
+			 redirect(base_url('admin'));
+
+
 		}
 
 

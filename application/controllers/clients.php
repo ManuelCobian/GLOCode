@@ -370,6 +370,28 @@ class Clients extends CI_Controller
 		}
 
 
+
+
+		function Profile(){
+					 $this->load->library('session');
+
+					 $email=$this->session->userdata('email');
+
+					  $perfil=$this->provedores->get_clientes($email);
+
+					 
+
+				$pagina="client/web/profile";
+				$app="Home";
+				$name="GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0";
+				$title="Mis Horarios";			
+			
+		 		$this->_example_output((object)array('name'=>$name,'title'=>$title,'pagina_interna'=>$pagina,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0'),(object)array('pagina_interna'=>$pagina,'perfil'=>$perfil,'title'=>$title,'output' => '', 'js_files' =>array(), 'css_files' => array(), 'app' => $app,'name'=>$name,$title=>'GLO TRASPORTATON MANAGMENT SYSTEM TMS v2.0')  );
+				
+
+		}
+
+
 		function enviar_contact(){
 
 

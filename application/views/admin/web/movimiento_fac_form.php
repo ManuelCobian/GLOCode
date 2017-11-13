@@ -7,7 +7,7 @@
     <h1 class="well">Enviar Correos del Confirmacion y Facturas </h1>
   <div class="col-lg-12 well">
   <div class="row">
-        <form action="<?php echo base_url('master/enviar_movimientos') ?>" method="post">
+        <form action="<?php echo base_url('admin/enviar_movimientos') ?>" method="post">
           <div class="col-sm-12">
             <div class="row">
 

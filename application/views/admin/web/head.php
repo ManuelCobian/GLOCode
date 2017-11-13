@@ -72,8 +72,8 @@ foreach($css_files as $file): ?>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         
-                        <li><a href="<?php echo base_url('clients/Profile') ?>"><i class="fa fa-user fa-fw"></i>Perfil</a>
-                        <li><a href="<?php echo base_url('login/log_out') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    
+                        <li><a href="<?php echo base_url('login/log_out') ?>"><i class="fa fa-sign-out fa-fw"></i>Cerrar Sesión</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -87,39 +87,54 @@ foreach($css_files as $file): ?>
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                             <center> <a href="<?php echo base_url('clients') ?>"><?php echo $this->session->userdata('email'); ?></a></center>  
+                             <center> <a href="<?php echo base_url('master') ?>"><?php echo $this->session->userdata('email'); ?></a></center>  
                             </div>
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="<?php echo base_url('clients') ?>"><i class="fa fa-dashboard fa-fw"></i>Panel</a>
+                            <a href="<?php echo base_url('master') ?>"><i class="fa fa-dashboard fa-fw"></i>Panel</a>
                         </li>
                         
 
                            <li>
-                            <a href="<?php echo base_url('clients/Provedores') ?>"><i class="fa fa-user fa-fw"></i>Provedores del sistema</a>
+                            <a href="<?php echo base_url('master/Provedores') ?>"><i class="fa fa-user fa-fw"></i>Administradores</a>
                         
                         </li>
                         
-                       
+                        <li>
+                            <a href="<?php echo base_url('master/Clientes') ?>"><i class="fa fa-user fa-fw"></i>Clientes</a>
+                        
+                        </li>
+
+
+                        
+                        
+                        <li>
+                            <a href="<?php echo base_url('master/Usuarios') ?>"><i class="fa fa-user fa-fw"></i>Usuarios</a>
+                        
+                        </li>
 
                    
                         <li>
-                            <a href="<?php echo base_url('clients/Movimientos') ?>"><i class="fa fa-car fa-fw"></i>Movimientos en Procesos</a>
+                            <a href="<?php echo base_url('master/Movimientos') ?>"><i class="fa fa-car fa-fw"></i>Movimientos en Procesos</a>
+                        
+                        </li>
+
+
+
+                         <li>
+                            <a href="<?php echo base_url('master/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
                         
                         </li>
 
 
                          <li>
-                            <a href="<?php echo base_url('clients/Movimientos_Facturas') ?>"><i class="fa fa-list fa-fw"></i>Confirmaciònes y Facturas</a>
+                            <a href="<?php echo base_url('master/Contacto') ?>"><i class="fa fa-envelope-o"></i>Contacto</a>
                         
                         </li>
 
                 
-                         <li>
-                            <a href="<?php echo base_url('clients/Contacto') ?>"><i class="fa fa-envelope-o"></i>Contacto</a>
                         
-                        </li>
                       
                           
                             <!-- /.nav-second-level -->

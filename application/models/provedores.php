@@ -6,6 +6,77 @@
 */
 class provedores extends CI_Model 
 {
+
+
+	function get_master($id=''){//sacar tu id de provedor
+
+		$this->db->select('*');
+		$this->db->from('provedores');
+		$this->db->like('Correo',$id);
+
+		$query=$this->db->get();
+
+		if ($query->num_rows()) {
+			
+			return $query->result_array();
+		}
+
+		else{
+            return false;
+		}
+
+
+
+	}
+
+
+
+	function get_users($id=''){//sacar tu id de provedor
+
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->like('Correo',$id);
+
+		$query=$this->db->get();
+
+		if ($query->num_rows()) {
+			
+			return $query->result_array();
+		}
+
+		else{
+            return false;
+		}
+
+
+
+	}
+
+
+
+	function get_clientes($id=''){//sacar tu id de provedor
+
+		$this->db->select('*');
+		$this->db->from('client');
+		$this->db->like('Correo',$id);
+
+		$query=$this->db->get();
+
+		if ($query->num_rows()) {
+			
+			return $query->result_array();
+		}
+
+		else{
+            return false;
+		}
+
+
+
+	}
+
+
+
 	
 	function get_user_id($id=''){//sacar tu id de provedor
 
@@ -56,6 +127,7 @@ class provedores extends CI_Model
 		$this->db->select('*');
 		$this->db->from('movimientos_facturas');
 		$this->db->join('movimientos', 'movimientos.id = movimientos_facturas.id_movimiento');
+		$this->db->join('client', 'client.id = movimientos_facturas.id_client');
 		$this->db->where('id_movimiento',$id);
 
 		$query=$this->db->get();

@@ -82,9 +82,13 @@ foreach($css_files as $file): ?>
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+
+                         <li><a href="<?php echo base_url('admin/Profile') ?>"><i class="fa fa-user fa-fw"></i>Perfil</a>
                         
                     
                         <li><a href="<?php echo base_url('login/log_out') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
+
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
